@@ -7,29 +7,35 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
-// TODO: this class should extends something to be a usable servlet.
-// TODO: add an annotation here to map your servlet on an URL.
-public class BagServlet {
+import javax.servlet.annotation.WebServlet;
+@WebServlet(urlPatterns={"/bag"})
+public class BagServlet extends HttpServlet{
 	
 	Bag myBag = new Bag();
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) 
 	throws ServletException, IOException {
+		res.setContentType("text/HTML");
 		PrintWriter out = res.getWriter();
-		
-		// TODO : print a html form using printwriter.
+		out.println("<form method=\"POST\" action=\"bag\">");
+		out.println("<input type=\"text\" name=\"ref\" value=\"Reference\">");
+		out.println("<input type=\"text\" name=\"qty\" value=\"Quantite\">");
+		out.println("<input type=\"submit\" value=\"envoyer\">");
+		out.println("</form>");
 	}
 
 	
 	
 	protected void doPost(HttpServletRequest req, HttpServletResponse res) 
 	throws ServletException, IOException {
+		res.setContentType("text/HTML");
 		PrintWriter out = res.getWriter();
-		
-		// TODO : Get parameters, check null
-		
-		// TODO : print reference and quantity
-
+		String ref = req.getParameter("ref");
+		String qty = req.getParameter("qty");
+		if((ref != null) and (qty != null)){
+			out.println(ref);
+			out.println(qty);
+		}
 	}
 	
 	
