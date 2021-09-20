@@ -17,6 +17,7 @@ public class BagServlet extends HttpServlet{
 	throws ServletException, IOException {
 		res.setContentType("text/html");
 		PrintWriter out = res.getWriter();
+		myBag.print(out);
 		out.println("<form method=\"POST\" action=\"bag\">");
 		out.println("<input type=\"text\" name=\"ref\" value=\"Reference\">");
 		out.println("<input type=\"text\" name=\"qty\" value=\"Quantite\">");
@@ -39,8 +40,8 @@ public class BagServlet extends HttpServlet{
 		else{if(!(qty.matches("[0-9]+"))){
 			res.sendError(400,"Quantity MUST be a number !");
 		}}
-		out.println(ref);
-		out.println(qty);
+		myBag.setItem(ref,Integer.parseInt(qty));
+		res.sendRedirect(req.getContextPath()+"/bag");
 
 	}
 	
