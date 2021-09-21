@@ -17,6 +17,7 @@ public class BagServlet extends HttpServlet{
 	throws ServletException, IOException {
 
 		HttpSession session = req.getSession(true);
+		if(session.getAttribute("bag") == null) session.setAttribute("bag",new Bag());
 		req.setAttribute("bag",(Bag) session.getAttribute("bag"));
 
 		res.setContentType("text/html");
