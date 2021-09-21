@@ -10,8 +10,6 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 @WebServlet(urlPatterns={"/bag"})
 public class BagServlet extends HttpServlet{
-
-	//Bag myBag = null;
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) 
 	throws ServletException, IOException {
@@ -57,7 +55,7 @@ public class BagServlet extends HttpServlet{
 		Bag myBag = (Bag)session.getAttribute("bag");
 		myBag.setItem(ref,Integer.parseInt(qty));
 		session.setAttribute("bag",myBag);
-		res.sendRedirect(req.getContextPath()+"/bag");
+		res.sendRedirect(req.getContextPath()+"/bag.jsp");
 
 	}
 	
