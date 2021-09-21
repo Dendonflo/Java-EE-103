@@ -10,22 +10,28 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.WebServlet;
 @WebServlet(urlPatterns={"/bag"})
 public class BagServlet extends HttpServlet{
+
+	public static String jspView = "/WEB-INF/bag.jsp";
 	
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) 
 	throws ServletException, IOException {
 
 		HttpSession session = req.getSession(true);
-		Bag myBag = (Bag)session.getAttribute("bag");
+		req.setAttribute("bag",(Bag) session.getAttribute("bag"));
 
 		res.setContentType("text/html");
 		PrintWriter out = res.getWriter();
 
+		/*
 		if (myBag != null) myBag.print(out);
 		out.println("<form method=\"POST\" action=\"bag\">");
 		out.println("<input type=\"text\" name=\"ref\" value=\"Reference\">");
 		out.println("<input type=\"text\" name=\"qty\" value=\"Quantite\">");
 		out.println("<input type=\"submit\" value=\"envoyer\">");
 		out.println("</form>");
+		*/
+		req.getRequestDispatcher(jspView).forward(req, res);
+
 	}
 
 	
@@ -55,7 +61,7 @@ public class BagServlet extends HttpServlet{
 		Bag myBag = (Bag)session.getAttribute("bag");
 		myBag.setItem(ref,Integer.parseInt(qty));
 		session.setAttribute("bag",myBag);
-		res.sendRedirect(req.getContextPath()+"/bag.jsp");
+		res.sendRedirect(req.getContextPath()+"/bag");
 
 	}
 	

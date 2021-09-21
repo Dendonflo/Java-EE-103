@@ -10,7 +10,7 @@
   <%@ page import="web.Bag" %>
   <% 
     out.println("<h1>sac</h1>");
-    Bag myBag = (Bag) session.getAttribute("bag");
+    Bag myBag = (Bag) request.getAttribute("bag");
         if(myBag != null){
           myBag.print(out);}         
   %>
